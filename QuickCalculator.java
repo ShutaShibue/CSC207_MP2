@@ -2,8 +2,17 @@ import java.io.PrintWriter;
 
 public class QuickCalculator {
     public static void main(String[] args) throws Exception {
-    PrintWriter pen = new PrintWriter(System.out, true);
+        PrintWriter pen = new PrintWriter(System.out, true);
+        BFCalculator calculator = new BFCalculator();
 
-    BFCalculator calculator = new BFCalculator();
+        for (int i = 0; i < args.length; i++) {
+            String[] cmd = args[i].split(" ");
+            if(cmd[0].equals("STORE")) calculator.store(cmd[1].toCharArray()[0]);
+            else 
+            {
+                calculator.evaluate(args[i]);
+                pen.println(args[i] + " = " + calculator.lastVal);
+            }
+        }
     }
 }

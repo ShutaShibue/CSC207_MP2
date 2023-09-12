@@ -11,13 +11,13 @@ public class BigFraction {
   BigInteger num;
   BigInteger denom;
 
-    /*
+  /*
    * New fraction with BigInt num and denom
    */
   public BigFraction(BigInteger num, BigInteger denom) {
     this.num = num;
     this.denom = denom;
-  } 
+  }
 
   /*
    * New fraction with int num and denom
@@ -27,13 +27,18 @@ public class BigFraction {
     this.denom = BigInteger.valueOf(denom);
   }
 
-    /*
+  /*
    * New fraction with string "num/denom"
    */
   public BigFraction(String str) {
-    String[] sep = str.split("/");
-    this.num = BigInteger.valueOf(Integer.parseInt(sep[0]));
-    this.denom = BigInteger.valueOf(Integer.parseInt(sep[1]));
+    if (!str.contains("/")) {
+      this.num = BigInteger.valueOf(Integer.parseInt(str));
+      this.denom = BigInteger.valueOf(1);
+    } else {
+      String[] sep = str.split("/");
+      this.num = BigInteger.valueOf(Integer.parseInt(sep[0]));
+      this.denom = BigInteger.valueOf(Integer.parseInt(sep[1]));
+    }
   }
 
   /**
@@ -61,26 +66,27 @@ public class BigFraction {
     BigFraction minus1 = new BigFraction(-1, 1);
     return add(subtractMe.multiply(minus1)); // return addition of two values but subtractMe is negated
   }// add(BigFraction)
-  
-    /**
+
+  /**
    * @param multiplyMe BigFraction to multiply
    * @return Resulting fraction
    */
-  public BigFraction multiply(BigFraction multiplyMe){
-    BigInteger resultNum = this.num.multiply(multiplyMe.num); //set result numerator to multiplied numerators
-    BigInteger resultDenom = this.denom.multiply(multiplyMe.denom); //set result denominator to multiplied denominators
-    return new BigFraction (resultNum, resultDenom); //return new BigFraction with result numerator and result denominator
-  } //multiply()
+  public BigFraction multiply(BigFraction multiplyMe) {
+    BigInteger resultNum = this.num.multiply(multiplyMe.num); // set result numerator to multiplied numerators
+    BigInteger resultDenom = this.denom.multiply(multiplyMe.denom); // set result denominator to multiplied denominators
+    return new BigFraction(resultNum, resultDenom); // return new BigFraction with result numerator and result
+                                                    // denominator
+  } // multiply()
 
-    /**
+  /**
    * @param divideMe BigFraction to multiply
    * @return Resulting fraction
    */
-  public BigFraction divide(BigFraction divideMe){
+  public BigFraction divide(BigFraction divideMe) {
     return multiply(divideMe.Invert());
   }
 
-  public BigFraction fractional(){
+  public BigFraction fractional() {
     int whole = this.num.divide(this.denom).intValue();
     BigFraction wholeFrac = new BigFraction(-whole, 1);
     return this.add(wholeFrac);
@@ -90,7 +96,7 @@ public class BigFraction {
    * 
    * @return Inverted Bigfraction
    */
-  public BigFraction Invert(){
+  public BigFraction Invert() {
     return new BigFraction(this.denom, this.num);
   }
 
@@ -100,14 +106,14 @@ public class BigFraction {
   public BigInteger denominator() {
     return this.denom;
   } // denominator()
-  
+
   /**
    * Get the numerator of this fraction.
    */
   public BigInteger numerator() {
     return this.num;
   } // numerator()
-  
+
   /**
    * Convert this fraction to a string for ease of printing.
    */
@@ -117,11 +123,17 @@ public class BigFraction {
       return "0";
     } // if it's zero
 
-    // Lump together the string represention of the numerator,
-    // a slash, and the string representation of the denominator
-    // return this.num.toString().concat("/").concat(this.denom.toString());
     return this.num + "/" + this.denom;
   } // toString()
 
+  static BigInteger gcd(BigInteger x, BigInteger y) { //Euclidean algorithm
+    return (y.intValue() == 0) ? x : gcd(y, x.mod(y)); // return previous y if x is divisible
+  }
+
+  void simplify() {
+    BigInteger factor = gcd(this.num, this.denom);
+      this.num = this.num.divide(factor);
+      this.denom = this.denom.divide(factor);
+  }
 
 } // class Fraction
