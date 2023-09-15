@@ -23,7 +23,7 @@ public class BFCalculator {
 
         for (int i = 1; i < args.length; i += 2) {
             BigFraction frac2;
-            if (args[i].matches("[a-zA-z]")) {
+            if (args[i+1].matches("[a-zA-z]")) {
                 frac2 = registerMap.get(args[i + 1].toCharArray()[0]); // if arg contains char, refer to register and
                                                                        // apply. arg is always length 1.
             } else {
