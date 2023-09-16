@@ -131,6 +131,11 @@ public class BigFraction {
   }
 
   void simplify() {
+    //bring nevative sign on denom to num
+    if(this.denom.intValue() < 0){
+      this.num = this.num.multiply(BigInteger.valueOf(-1));
+      this.denom = this.denom.multiply(BigInteger.valueOf(-1));
+    }
     BigInteger factor = gcd(this.num, this.denom);
       this.num = this.num.divide(factor);
       this.denom = this.denom.divide(factor);

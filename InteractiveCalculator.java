@@ -1,6 +1,11 @@
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Main class that takes input from command line and print the result of evaluation continuously to provide calculator function.
+ * 
+ * @author Shuta Shibue
+ */
 public class InteractiveCalculator {
     public static void main(String[] DefArgs) throws Exception {
         PrintWriter pen = new PrintWriter(System.out, true);

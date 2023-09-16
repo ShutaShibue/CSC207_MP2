@@ -19,3 +19,5 @@ Shuta Shibue
 
 <https://stackoverflow.com/questions/13216314/hashmap-does-not-work-with-int-char>
 For solving problem with Hashmap using char as key.
+<https://stackoverflow.com/questions/12396765/continuous-input-commands>
+To know how to get inputs continuously from the commandline

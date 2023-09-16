@@ -1,5 +1,10 @@
 import java.io.PrintWriter;
 
+/**
+ * Main class that takes expressions as argument and write answers to the console.
+ * 
+ * @author Shuta Shibue
+ */
 public class QuickCalculator {
     public static void main(String[] args) throws Exception {
         PrintWriter pen = new PrintWriter(System.out, true);
