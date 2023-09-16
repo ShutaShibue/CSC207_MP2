@@ -1,5 +1,3 @@
-import java.util.HashMap;
-
 /**
  * Calculator class that can evaluate expressions and store values.
  * 
