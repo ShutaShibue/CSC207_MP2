@@ -123,12 +123,16 @@ public class BigFraction {
    * Convert this fraction to a string for ease of printing.
    */
   public String toString() {
+    simplify();
     // Special case: It's zero
     if (this.num.equals(BigInteger.ZERO)) {
       return "0";
     } // if it's zero
-
-    return this.num + "/" + this.denom;
+    else if(this.denom.intValue() == 1)
+    {
+      return this.num + "";
+    }
+    else return this.num + "/" + this.denom;
   } // toString()
 
   static BigInteger gcd(BigInteger x, BigInteger y) { // Euclidean algorithm

@@ -14,8 +14,8 @@ public class QuickCalculator {
       if(cmd[0].equals("STORE")) calculator.store(cmd[1].toCharArray()[0]);
       else 
       {
-        calculator.evaluate(args[i]);
-        pen.println(args[i] + " = " + calculator.lastVal);
+        BigFraction result = calculator.evaluate(args[i]);
+        if(result != null) pen.println(args[i] + " = " + result);
       }
     }
   }

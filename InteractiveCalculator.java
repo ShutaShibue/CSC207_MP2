@@ -23,8 +23,8 @@ public class InteractiveCalculator {
       if (args[0].equals("STORE"))
         calculator.store(args[1].toCharArray()[0]);
       else {
-        calculator.evaluate(line);
-        pen.println(calculator.lastVal);
+        BigFraction result = calculator.evaluate(line);
+        if(result != null) pen.println(result);
       }
     }
     sc.close();

@@ -1,3 +1,5 @@
+import java.io.PrintWriter;
+
 /**
  * Calculator class that can evaluate expressions and store values.
  * 
@@ -8,7 +10,7 @@ public class BFCalculator {
                                                               // null value
   BigFraction[] f = new BigFraction[26];
   public BFCalculator() {}
-  
+  PrintWriter pen = new PrintWriter(System.out, true);
   /**
     * Evaluate given string, but precedence incensitive
     * @param exp String type equation to evaluate
@@ -19,13 +21,18 @@ public class BFCalculator {
 
     //This should be done outside loop because the first number must be stored into lastVal.
     if (args[0].matches("[a-zA-z]")) {
-      lastVal = f[Character.toLowerCase(args[0].toCharArray()[0]) - 97]; //turn to lower and then shift 97 (a->0)
-
-    } else if(args[0].matches("(-?\\d{1,}\\/-?\\d{1,})|\\d{1,}")){
+      lastVal = f[Character.toLowerCase(args[0].toCharArray()[0]) - 'a']; //turn to lower and then shift 97 (a->0)
+    } else if(args[0].matches("(-?\\d{1,}\\/-?\\d{1,})|\\d{1,}")){ //regex for fraction ot integer
       lastVal = new BigFraction(args[0]);
     }
-    else throw new Error("Number or char expected, but " + args[0] + " was given.", null);
-
+    else{
+      pen.println("Number or char expected, but " + args[0] + " was given.");
+      return null;
+    }
+    if(args.length %2 == 0){
+      pen.println("Wrong number of inputs were given. Equation has to have odd number of elements.");
+      return null;
+    }
     for (int i = 1; i < args.length; i += 2) {
       BigFraction frac2;
       if (args[i + 1].matches("[a-zA-z]")) {
@@ -35,10 +42,12 @@ public class BFCalculator {
         // otherwise just create bigfraction from string.
         frac2 = new BigFraction(args[i + 1]); 
       }
-      else throw new Error("Number or char expected, but " + args[i + 1] + " was given.", null);  
+      else{
+        pen.println("Number or char expected, but " + args[i + 1] + " was given.");  
+        return null;
+      }
       execute(frac2, args[i].toCharArray()[0]); // args start from index 1, commands starts 0
     }
-    lastVal.simplify();
     return lastVal;
   }//evaluate(String)
   
@@ -47,8 +56,10 @@ public class BFCalculator {
   * @param register A character key to register the latest value.
   */
   public void store(char register) {
-    if(!Character.isAlphabetic(register)) throw new Error("STORE key must be alphabet.", null);
-    f[Character.toLowerCase(register)- 97] = lastVal;
+    if(!Character.isAlphabetic(register)) {
+      pen.println("STORE key must be alphabet.");
+    }
+    f[Character.toLowerCase(register)- 'a'] = lastVal;
   }//store(char)
   
   /**
@@ -68,7 +79,7 @@ public class BFCalculator {
     else if (command == '/')
       lastVal = lastVal.divide(frac2);
     else
-      throw new Error("+, -, *, or / was expected, but " + command + " was given." , null);
+      pen.println("+, -, *, or / was expected, but " + command + " was given.");
   }//execute(Bigfraction, char)
   
 } //class BFCalculator
