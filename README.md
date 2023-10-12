@@ -6,6 +6,9 @@ Shuta Shibue
 
 ## Contents
 
+This project imprements basic addition, subtraction, multiplication and division of integers and fractions.  
+There are two modes, QuickCalculator to imput equation as commandline argument and InteractiveCalculator to provide continuous calculation and value store.
+
 - BigFraction.java
   - An extended version of the Fraction class with subtraction and division.
 - BFCalculator.java
