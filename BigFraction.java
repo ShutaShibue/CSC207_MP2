@@ -53,7 +53,8 @@ public class BigFraction {
    * @return Resulting fraction
    */
   public BigFraction add(BigFraction addMe) {
-    BigInteger resultNumerator = (this.num.multiply(addMe.denom)).add(addMe.num.multiply(this.denom));
+    BigInteger resultNumerator =
+        (this.num.multiply(addMe.denom)).add(addMe.num.multiply(this.denom));
     BigInteger resultDenominator = this.denom.multiply(addMe.denom);
     return new BigFraction(resultNumerator, resultDenominator);
   }// add(BigFraction)
@@ -64,7 +65,8 @@ public class BigFraction {
    */
   public BigFraction subtract(BigFraction subtractMe) {
     BigFraction minus1 = new BigFraction(-1, 1);
-    return add(subtractMe.multiply(minus1)); // return addition of two values but subtractMe is negated
+    return add(subtractMe.multiply(minus1)); // return addition of two values but subtractMe is
+                                             // negated
   }// add(BigFraction)
 
   /**
@@ -72,9 +74,12 @@ public class BigFraction {
    * @return Resulting fraction
    */
   public BigFraction multiply(BigFraction multiplyMe) {
-    BigInteger resultNum = this.num.multiply(multiplyMe.num); // set result numerator to multiplied numerators
-    BigInteger resultDenom = this.denom.multiply(multiplyMe.denom); // set result denominator to multiplied denominators
-    return new BigFraction(resultNum, resultDenom); // return new BigFraction with result numerator and result
+    BigInteger resultNum = this.num.multiply(multiplyMe.num); // set result numerator to multiplied
+                                                              // numerators
+    BigInteger resultDenom = this.denom.multiply(multiplyMe.denom); // set result denominator to
+                                                                    // multiplied denominators
+    return new BigFraction(resultNum, resultDenom); // return new BigFraction with result numerator
+                                                    // and result
                                                     // denominator
   } // multiply()
 
@@ -126,19 +131,19 @@ public class BigFraction {
     return this.num + "/" + this.denom;
   } // toString()
 
-  static BigInteger gcd(BigInteger x, BigInteger y) { //Euclidean algorithm
+  static BigInteger gcd(BigInteger x, BigInteger y) { // Euclidean algorithm
     return (y.intValue() == 0) ? x : gcd(y, x.mod(y)); // return previous y if x is divisible
   }
 
   void simplify() {
-    //bring nevative sign on denom to num
-    if(this.denom.intValue() < 0){
+    // bring nevative sign on denom to num
+    if (this.denom.intValue() < 0) {
       this.num = this.num.multiply(BigInteger.valueOf(-1));
       this.denom = this.denom.multiply(BigInteger.valueOf(-1));
     }
     BigInteger factor = gcd(this.num, this.denom);
-      this.num = this.num.divide(factor);
-      this.denom = this.denom.divide(factor);
+    this.num = this.num.divide(factor);
+    this.denom = this.denom.divide(factor);
   }
 
 } // class Fraction
