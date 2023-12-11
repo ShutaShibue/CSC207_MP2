@@ -24,7 +24,8 @@ public class InteractiveCalculator {
         calculator.store(args[1].toCharArray()[0]);
       else {
         BigFraction result = calculator.evaluate(line);
-        if(result != null) pen.println(result);
+        if (result != null)
+          pen.println(result);
       }
     }
     sc.close();

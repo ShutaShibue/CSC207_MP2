@@ -128,11 +128,10 @@ public class BigFraction {
     if (this.num.equals(BigInteger.ZERO)) {
       return "0";
     } // if it's zero
-    else if(this.denom.intValue() == 1)
-    {
+    else if (this.denom.intValue() == 1) {
       return this.num + "";
-    }
-    else return this.num + "/" + this.denom;
+    } else
+      return this.num + "/" + this.denom;
   } // toString()
 
   static BigInteger gcd(BigInteger x, BigInteger y) { // Euclidean algorithm
